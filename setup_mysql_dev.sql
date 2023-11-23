@@ -9,3 +9,10 @@ USE hbnb_dev_db;
 CREATE USER IF NOT EXISTS 'hbnb_dev'@'localhost' IDENTIFIED BY 'hbnb_dev_pwd';
 GRANT ALL PRIVILEGES ON hbnb_dev_db.* TO 'hbnb_dev'@'localhost';
 GRANT SELECT ON performance_schema.* TO 'hbnb_dev'@'localhost';
+
+CREATE TABLE IF NOT EXISTS users (
+    email VARCHAR(128) NOT NULL,
+    password VARCHAR(128) NOT NULL,
+    first_name VARCHAR(128),
+    last_name VARCHAR(128)
+)
