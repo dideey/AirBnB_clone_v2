@@ -16,3 +16,13 @@ CREATE TABLE IF NOT EXISTS users (
     first_name VARCHAR(128),
     last_name VARCHAR(128)
 )
+CREATE TABLE IF NOT EXISTS states (
+    name VARCHAR(128) NOT NULL,
+    PRIMARY KEY (name)
+)
+
+CREATE TABLE IF NOT EXISTS cities (
+    name VARCHAR(128) NOT NULL,
+    state_id VARCHAR(60) NOT NULL,
+    FOREIGN KEY (state_id) REFERENCES states(name)
+)
