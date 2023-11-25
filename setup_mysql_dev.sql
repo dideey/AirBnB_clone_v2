@@ -9,29 +9,3 @@ USE hbnb_dev_db;
 CREATE USER IF NOT EXISTS 'hbnb_dev'@'localhost' IDENTIFIED BY 'hbnb_dev_pwd';
 GRANT ALL PRIVILEGES ON hbnb_dev_db.* TO 'hbnb_dev'@'localhost';
 GRANT SELECT ON performance_schema.* TO 'hbnb_dev'@'localhost';
-
-CREATE TABLE IF NOT EXISTS users (
-    email VARCHAR(128) NOT NULL,
-    password VARCHAR(128) NOT NULL,
-    first_name VARCHAR(128),
-    last_name VARCHAR(128),
-)
-
-CREATE TABLE IF NOT EXISTS states (
-    id varchar(60) NOT NULL,
-    created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    name VARCHAR(128) NOT NULL,
-    PRIMARY KEY (name),
-    PRIMARY KEY (id)
-)
-
-CREATE TABLE IF NOT EXISTS cities (
-    id varchar(60) NOT NULL,
-    created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    name VARCHAR(128) NOT NULL,
-    state_id VARCHAR(60) NOT NULL,
-    FOREIGN KEY (state_id) REFERENCES states(name),
-    PRIMARY KEY (id)
-)
