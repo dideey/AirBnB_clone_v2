@@ -11,14 +11,10 @@ GRANT ALL PRIVILEGES ON hbnb_dev_db.* TO 'hbnb_dev'@'localhost';
 GRANT SELECT ON performance_schema.* TO 'hbnb_dev'@'localhost';
 
 CREATE TABLE IF NOT EXISTS users (
-    id varchar(60) NOT NULL,
-    created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
     email VARCHAR(128) NOT NULL,
     password VARCHAR(128) NOT NULL,
     first_name VARCHAR(128),
     last_name VARCHAR(128),
-    PRIMARY KEY (id)
 )
 CREATE TABLE IF NOT EXISTS states (
     id varchar(60) NOT NULL,
