@@ -51,7 +51,7 @@ class BaseModel:
         dictionary['updated_at'] = self.updated_at.isoformat()
         try:
             del dictionary["_sa_instance_state"]
-        except:
+        except Exception:
             pass
         return dictionary
 
