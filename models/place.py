@@ -32,7 +32,7 @@ class Place(BaseModel, Base):
     city_id = Column(String(60), ForeignKey("cities.id"), nullable=False)
     user_id = Column(String(60), ForeignKey("users.id"), nullable=False)
     reviews = relationship("Review", cascade="all,delete", backref="place")
-    amenities = relationship("Amenity", secondary="place_amenity",
+    _amenities = relationship("Amenity", secondary="place_amenity",
                              viewonly=False, back_populates="place_amenities")
 
     @property
