@@ -33,7 +33,7 @@ class FileStorage:
         """The added delete metthod"""
         if obj is not None:
             key = "{}.{}".format(obj.__class__.__name__, obj.id)
-            del FileStorage.__objects[key]
+            del self.__objects[key]
             self.save()
 
     def reload(self):
