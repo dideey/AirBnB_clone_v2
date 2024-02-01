@@ -13,7 +13,7 @@ def do_deploy(archive_path):
     if exists(archive_path) is False:
         return False
     try:
-        put("archive_path", "/tmp/")
+        put(archive_path, "/tmp/")
         archive_filename = archive_path.split('/')[-1]
         archive_folder = '/data/web_static/releases/{}'.format(
             archive_filename.split('.')[0])
