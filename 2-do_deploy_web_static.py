@@ -17,7 +17,7 @@ def do_deploy(archive_path):
             archive_filename.split('.')[0])
     try:
         put(archive_path, "/tmp/")
-        run('sudo mkdir -p {}./'format(archive_folder))
+        run('sudo mkdir -p {}./'.format(archive_folder))
         run('sudo tar -xzf /tmp/{} -C {}/'.format(
             archive_filename, archive_folder))
         run('sudo rm /tmp/{}'.format(archive_filename))
