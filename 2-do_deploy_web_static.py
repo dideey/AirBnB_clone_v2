@@ -3,6 +3,7 @@
    to the web servers
 """
 from fabric.api import *
+from os.path import exists
 env.hosts = ['	54.237.80.147', '100.24.235.237']
 
 
