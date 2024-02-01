@@ -1,26 +1,22 @@
 #!/usr/bin/env bash
 #The script setsup my web servers for the deployment of web-static
 #installs nginx if not already installed
-if [ ! -x "$(command -v nginx)" ]; then
     sudo apt-get update
     sudo apt-get install -y nginx
-fi
+    sudo ufw allow 'Nginx HTTP'
 #creates the specified folders if they don't already exist
-if [ ! -d "/data" ]; then
-    sudo mkrdir "/data"
-fi
-if [ ! -d "/data/web_static/" ]; then
-    sudo mkdir "/data/web_static/"
-fi
-if [ ! -d "/data/web_static/releases/" ]; then
-    sudo mkdir "/data/web_static/releases/"
-fi
-if [ ! -d "/data/web_static/shared/" ]; then
-    sudo mkdir "/data/web_static/shared/"
-fi
-if [ ! -d "/data/web_static/releases/test/" ]; then
-    sudo mkdir "/data/web_static/releases/test/"
-fi
+
+    sudo mkdir -p "/data"
+
+    sudo mkdir -p "/data/web_static/"
+
+    sudo mkdir -p "/data/web_static/releases/"
+
+    sudo mkdir -p "/data/web_static/shared/"
+
+    sudo mkdir -p "/data/web_static/releases/test/"
+
+    sudo touch /data/web_static/releases/test/index.html
 #creates a simple html file for testing purposes
 echo "<!DOCTYPE html>
 <html>
@@ -31,7 +27,7 @@ echo "<!DOCTYPE html>
     <h1>Hello i'm Diddy</h1>
     <p1>Testing</p1>
 </body>
-</html>" > /data/web_static/releases/test/index.html
+</html>" | sudo tee /data/web_static/releases/test/index.html
 #removes symbolic link if any
 rm -f /data/web_static/releases/test
 #creates a new link
