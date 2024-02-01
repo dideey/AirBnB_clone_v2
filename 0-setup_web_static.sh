@@ -18,31 +18,17 @@
 
     sudo touch /data/web_static/releases/test/index.html
 #creates a simple html file for testing purposes
-echo "<!DOCTYPE html>
-<html>
+sudo echo "<html>
 <head>
-    <title>Simple file</title>
 </head>
 <body>
-    <h1>Hello i'm Diddy</h1>
-    <p1>Testing</p1>
+    Hoberton School
 </body>
 </html>" | sudo tee /data/web_static/releases/test/index.html
-#removes symbolic link if any
-rm -f /data/web_static/releases/test
-#creates a new link
-ln -s /data/web_static/current /data/web_static/releases/test/
+
+sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
 #Giving ownership of the '/data' folder to 'Ubuntu'(group and user)
 sudo chown -R ubuntu:ubuntu /data/
 #updating the Nginx configuration to serve the content of '/data/web_static/current/' to 'hbnb_static'
-# Nginx configuration file path
-nginx_config="/etc/nginx/sites-available/default"
-# Alias configuration
-alias_config="location /hbnb_static/ {
-    alias /data/web_static/current/;
-    index index.html;
-}"
-#updating the aliasconfig to nginxconfig
-sudo sed -i "/server {/a $alias_config" "$nginx_config"
-#restarting nginx
-sudo systemctl restart nginx
+sudo sed -i '38i\\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t}\n' /etc/nginx/sites-available/default
+sudo service restart nginx
