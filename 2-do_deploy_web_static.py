@@ -8,24 +8,21 @@ env.hosts = ['	54.237.80.147', '100.24.235.237']
 
 
 def do_deploy(archive_path):
-    """ distributes an archive to your web servers
-    """
+    """distributes an archive to the web servers"""
     if exists(archive_path) is False:
         return False
-    file = archive_path.split('/')[-1]
-    extract_tgz = '/data/web_static/releases/'\
-        + "{}".format(file.split('.')[0])
-    tmp = "/tmp/" + file
-
     try:
-        put(archive_path, "/tmp/")
-        run("sudo mkdir -p {}/".format(extract_tgz))
-        run("sudo tar -xzf {} -C {}/".format(tmp, extract_tgz))
-        run("sudo rm {}".format(tmp))
-        run("sudo mv {}/web_static/* {}/".format(extract_tgz, extract_tgz))
-        run("sudo rm -rf {}/web_static".format(extract_tgz))
-        run("sudo rm -rf /data/web_static/current")
-        run("sudo ln -s {}/ /data/web_static/current".format(extract_tgz))
+        file_n = archive_path.split("/")[-1]
+        no_ext = file_n.split(".")[0]
+        path = "/data/web_static/releases/"
+        put(archive_path, '/tmp/')
+        run('mkdir -p {}{}/'.format(path, no_ext))
+        run('tar -xzf /tmp/{} -C {}{}/'.format(file_n, path, no_ext))
+        run('rm /tmp/{}'.format(file_n))
+        run('mv {0}{1}/web_static/* {0}{1}/'.format(path, no_ext))
+        run('rm -rf {}{}/web_static'.format(path, no_ext))
+        run('rm -rf /data/web_static/current')
+        run('ln -s {}{}/ /data/web_static/current'.format(path, no_ext))
         return True
-    except Exception:
+    except:
         return False
