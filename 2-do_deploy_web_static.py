@@ -11,13 +11,13 @@ def do_deploy(archive_path):
     """deploys web_static
     """
     if exists(archive_path) is False:
-        return False
-    try:
-        put(archive_path, "/tmp/")
+        return False'
         archive_filename = archive_path.split('/')[-1]
         archive_folder = '/data/web_static/releases/{}'.format(
             archive_filename.split('.')[0])
-        run('sudo mkdir -p {}./'formart(archive_folder))
+    try:
+        put(archive_path, "/tmp/")
+        run('sudo mkdir -p {}./'format(archive_folder))
         run('sudo tar -xzf /tmp/{} -C {}/'.format(archive_filename, archive_folder))
         run('sudo rm /tmp/{}'.format(archive_filename))
         run("sudo mv {}/web_static/* {}/".format(archive_folder, archive_folder))
