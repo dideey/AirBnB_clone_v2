@@ -7,6 +7,7 @@ from os.path import exists
 from datetime import datetime
 env.hosts = ['	54.237.80.147', '100.24.235.237']
 
+
 def do_pack():
 
     """"Creates the .tgz files"""
@@ -19,6 +20,7 @@ def do_pack():
         return file
     else:
         return None
+
 
 def do_deploy(archive_path):
     """deploys web_static
@@ -42,6 +44,7 @@ def do_deploy(archive_path):
         return True
     except Exception:
         return False
+
 
 def deploy():
     """deploys fully
